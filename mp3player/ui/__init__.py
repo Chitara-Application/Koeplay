@@ -1,0 +1,1 @@
+"""Koeplay (PySide6版)"""

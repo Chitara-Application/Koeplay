@@ -1,0 +1,36 @@
+# ---- 仮想環境 ----
+.venv/
+venv/
+env/
+
+# ---- Python のキャッシュ ----
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- ビルド成果物(PyInstaller / Inno Setup が作るもの) ----
+# Koeplay.spec と Koeplay.iss は手で書いた設定なので、管理対象に含める。
+build/
+dist/
+dist_installer/
+
+# ---- VB-CABLE ----
+# VB-Audioの配布条件があるため、公開リポジトリには含めない。
+# 公式サイト(https://vb-audio.com/Cable/)から取得し、Koeplay.iss と同じフォルダーに置く。
+VBCABLE_Driver_Pack*.zip
+VBCABLE*/
+
+# ---- 作業中に出る不要物 ----
+files.zip
+mnt/
+*.log
+*.tmp
+
+# ---- エディタ・OS ----
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store

@@ -1,0 +1,5 @@
+PySide6
+numpy
+sounddevice
+av
+pyinstaller>=6.0

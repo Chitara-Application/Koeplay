@@ -1,0 +1,11 @@
+# 改行コードの自動変換を有効にする
+* text=auto
+
+# Inno Setup のスクリプトは Windows 形式(CRLF)で固定
+*.iss text eol=crlf
+
+# バイナリは変換しない
+*.zip binary
+*.exe binary
+*.png binary
+*.ico binary

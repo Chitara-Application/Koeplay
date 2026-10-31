@@ -1,14 +1,11 @@
-<p align="center">
-  <img src="assets/icon.png" width="96" alt="Koeplay">
-</p>
+## <img width="256" height="256" alt="icon" src="https://github.com/user-attachments/assets/fb97b081-6787-4666-8108-b54515a69412" />
 
 # Koeplay
 
 マイクと音声ファイルをミックスして、**VB-CABLE 経由で Discord などへ送る** Windows 向けのミキサー兼プレイヤーです。
 BGM や効果音を流しながら、自分の声も同時に届けられます。
 
-![Koeplay の画面](docs/screenshot.png)
-
+<img width="1100" height="740" alt="screenshot" src="https://github.com/user-attachments/assets/263323f4-b7ce-49c3-a11d-22134d195c4d" />
 ## 特長
 
 - **マイク + 音声ファイルを1つにミックス**して、仮想マイク(VB-CABLE)へ出力

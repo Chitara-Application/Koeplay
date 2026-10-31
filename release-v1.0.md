@@ -43,7 +43,8 @@
 ### チェックサム(SHA-256)
 
 ```
-(ここに Get-FileHash の結果を貼る)
+installer BCE3528F28906D1A799CEC93113040499B86BBF8271C51C1CC6033693E84B3D5
+
 ```
 
 ### VB-CABLE について

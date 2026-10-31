@@ -194,27 +194,56 @@ def make_icon(kind: str, color: str = theme.TEXT, size: int = 96) -> QIcon:
     return QIcon(pixmap)
 
 
-def make_app_icon() -> QIcon:
-    """アプリのアイコン(波形バー)。"""
-    size = 256
+def _draw_app_icon(size: int) -> QPixmap:
+    """指定サイズのアプリアイコン(波形バー)を描く。
+
+    小さいサイズ(32px以下)は、細いバーが潰れて見えなくなるため、
+    バーの本数を減らして太くする。
+    """
     pixmap = QPixmap(size, size)
     pixmap.fill(Qt.GlobalColor.transparent)
     painter = QPainter(pixmap)
     painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+    s = float(size)
+    small = size <= 32
+
+    inset = s * (0.02 if small else 0.031)
+    radius = s * (0.22 if small else 0.203)
     background = QPainterPath()
-    background.addRoundedRect(QRectF(8, 8, size - 16, size - 16), 52, 52)
+    background.addRoundedRect(
+        QRectF(inset, inset, s - 2 * inset, s - 2 * inset), radius, radius
+    )
     painter.fillPath(background, QColor(theme.PANEL))
-    painter.setPen(QPen(QColor(theme.LINE), 4))
-    painter.drawPath(background)
+    if not small:
+        painter.setPen(QPen(QColor(theme.LINE), max(1.0, s * 0.016)))
+        painter.drawPath(background)
+
     painter.setPen(Qt.PenStyle.NoPen)
     painter.setBrush(QColor(theme.ACCENT))
-    heights = (0.30, 0.52, 0.72, 0.46, 0.60, 0.34)
-    bar, gap = 20.0, 12.0
+    if small:
+        heights = (0.36, 0.70, 0.50, 0.62)
+        bar, gap = 0.135, 0.075
+    else:
+        heights = (0.30, 0.52, 0.72, 0.46, 0.60, 0.34)
+        bar, gap = 0.078, 0.047
     total = len(heights) * bar + (len(heights) - 1) * gap
-    x = (size - total) / 2
+    x = (1.0 - total) / 2
     for h in heights:
-        height = size * h
-        painter.drawRoundedRect(QRectF(x, (size - height) / 2, bar, height), 10, 10)
+        painter.drawRoundedRect(
+            QRectF(x * s, (1.0 - h) / 2 * s, bar * s, h * s),
+            bar * s * 0.5, bar * s * 0.5,
+        )
         x += bar + gap
     painter.end()
-    return QIcon(pixmap)
+    return pixmap
+
+
+APP_ICON_SIZES = (16, 20, 24, 32, 40, 48, 64, 96, 128, 256)
+
+
+def make_app_icon() -> QIcon:
+    """アプリのアイコン。サイズごとに描き分け、表示サイズに合う絵をQtが選ぶ。"""
+    icon = QIcon()
+    for size in APP_ICON_SIZES:
+        icon.addPixmap(_draw_app_icon(size))
+    return icon

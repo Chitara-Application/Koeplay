@@ -49,6 +49,7 @@ exe = EXE(
     upx=False,          # UPXはQtのDLLを壊すことがあるので使わない
     console=False,      # 黒い窓を出さない
     disable_windowed_traceback=False,
+    icon="assets/icon.ico",   # EXEのアイコン(作り直す時は tools/make_icon.py)
 )
 
 coll = COLLECT(

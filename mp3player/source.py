@@ -13,6 +13,19 @@ import av
 import numpy as np
 
 
+def _pretty_codec(name: str) -> str:
+    """FFmpegの内部名(mp3float, pcm_s16le など)を、画面に出す名前に整える。"""
+    lowered = name.lower()
+    for prefix, label in (
+        ("mp3", "MP3"), ("pcm", "PCM"), ("aac", "AAC"), ("vorbis", "Vorbis"),
+        ("opus", "Opus"), ("flac", "FLAC"), ("wma", "WMA"), ("alac", "ALAC"),
+        ("ape", "APE"), ("ac3", "AC3"), ("eac3", "E-AC3"), ("dts", "DTS"),
+    ):
+        if lowered.startswith(prefix):
+            return label
+    return name.upper()
+
+
 class AudioSource:
     def __init__(self, path: Path | str, rate: int, start: float = 0.0) -> None:
         self.path = Path(path)
@@ -33,7 +46,7 @@ class AudioSource:
         self.title = meta.get("title", "")
         self.artist = meta.get("artist", "")
         codec = getattr(self._stream.codec_context, "name", "") or ""
-        self.codec = codec.upper()
+        self.codec = _pretty_codec(codec)
         self.error = ""
         # モノラル音源はステレオ化すると-3dB小さくなるので、その分を持ち上げる。
         try:

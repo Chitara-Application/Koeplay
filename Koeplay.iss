@@ -10,6 +10,7 @@
 #define MyAppName "Koeplay"
 #define MyAppVersion "1.0"
 #define MyAppPublisher "Chitara-Applications"
+#define MyAppURL "https://github.com/Chitara-Application/Koeplay"
 #define MyAppExeName "Koeplay.exe"
 #define VBZip "VBCABLE_Driver_Pack45.zip"
 #define VBSetup "VBCABLE_Setup_x64.exe"
@@ -19,6 +20,9 @@ AppId={{9B5C83CC-FDC8-4263-ABEC-1EAD5AD0766C}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
+AppPublisherURL={#MyAppURL}
+AppSupportURL={#MyAppURL}/issues
+AppUpdatesURL={#MyAppURL}/releases
 DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
@@ -29,6 +33,13 @@ SolidCompression=yes
 WizardStyle=modern
 ArchitecturesInstallIn64BitMode=x64
 UninstallDisplayIcon={app}\{#MyAppExeName}
+; インストーラー自身(Koeplay_Setup_1.0.exe)のアイコン
+SetupIconFile=assets\icon.ico
+; インストーラーのファイルのプロパティに表示される情報
+VersionInfoVersion=1.0.0.0
+VersionInfoCompany={#MyAppPublisher}
+VersionInfoDescription={#MyAppName} セットアップ
+VersionInfoProductName={#MyAppName}
 ; VB-CABLE(ドライバ)の導入に管理者権限が必要
 PrivilegesRequired=admin
 ; 常駐中(トレイ)のKoeplayを、更新時に自動で閉じる
